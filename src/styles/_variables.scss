@@ -1,0 +1,166 @@
+$primary-color: #4CAF50;
+$secondary-color: #45a049;
+$disabled-color: #cccccc;
+$background-dark: #071f55;
+$background-light: #0f7ea9;
+$text-primary: #ffffff;
+$text-secondary: #9ca3af;
+$success-color: #10b981;
+$danger-color: #ef4444;
+$warning-color: #f59e0b;
+
+$tile-unrevealed: #374151;
+$tile-revealed: #059669;
+$tile-mine: #dc2626;
+$tile-hover: #4b5563;
+
+$gradient-primary: linear-gradient(to right, $primary-color, $secondary-color);
+$gradient-success: linear-gradient(to right, #059669, #10b981);
+$gradient-danger: linear-gradient(to right, #dc2626, #ef4444);
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+
+$border-radius-sm: 0.25rem;
+$border-radius-md: 0.5rem;
+$border-radius-lg: 1rem;
+$border-radius-full: 9999px;
+
+$transition-fast: 150ms;
+$transition-normal: 300ms;
+$transition-slow: 500ms;
+
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+$font-size-4xl: 2.25rem;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$grid-columns: 5;
+$grid-gap: $spacing-sm;
+$tile-size: 60px;
+
+$animation-duration-fast: 150ms;
+$animation-duration-normal: 300ms;
+$animation-duration-slow: 500ms;
+$animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+$bet-controls-width: 300px;
+$stats-panel-height: 100px;
+$grid-container-max-width: 500px;
+
+$breakpoint-xs: 320px; 
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+$z-index-base: 1;
+$z-index-above: 2;
+$z-index-modal: 10;
+$z-index-overlay: 20;
+$z-index-tooltip: 30;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin grid-tile {
+  width: $tile-size;
+  height: $tile-size;
+  border-radius: $border-radius-md;
+  transition: all $transition-normal $animation-timing;
+}
+
+@mixin button-base {
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  font-weight: $font-weight-medium;
+  transition: all $transition-normal;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin game-panel {
+  background-color: $background-light;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-lg;
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
+
+//animation
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+$theme-light-background: #ffffff;
+$theme-light-text: #1f2937;
+$theme-light-tile-unrevealed: #e5e7eb;
+$theme-light-tile-revealed: #34d399;
+$theme-light-tile-mine: #f87171;
+
+$theme-dark-background: #111827;
+$theme-dark-text: #ffffff;
+$theme-dark-tile-unrevealed: #374151;
+$theme-dark-tile-revealed: #059669;
+$theme-dark-tile-mine: #dc2626;
+
+:root {
+  --theme-light-background: #{$theme-light-background};
+  --theme-light-text: #{$theme-light-text};
+  --theme-light-tile-unrevealed: #{$theme-light-tile-unrevealed};
+  --theme-light-tile-revealed: #{$theme-light-tile-revealed};
+  --theme-light-tile-mine: #{$theme-light-tile-mine};
+
+  --theme-dark-background: #{$theme-dark-background};
+  --theme-dark-text: #{$theme-dark-text};
+  --theme-dark-tile-unrevealed: #{$theme-dark-tile-unrevealed};
+  --theme-dark-tile-revealed: #{$theme-dark-tile-revealed};
+  --theme-dark-tile-mine: #{$theme-dark-tile-mine};
+}

@@ -1,0 +1,175 @@
+@use 'variables' as *;
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100vh;
+  background-color: $background-dark;
+}
+
+.game-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $background-dark;
+  color: $text-primary;
+  overflow-x: hidden;
+  position: relative;
+
+  //mobile
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $background-dark;
+    z-index: -1;
+  }
+
+  padding: $spacing-md;
+  
+  @include responsive(sm) {
+    padding: $spacing-lg;
+  }
+  
+  @include responsive(md) {
+    padding: $spacing-xl;
+  }
+}
+
+.game-container {
+  flex: 1;
+  width: 100%;
+  max-width: $grid-container-max-width * 2;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.game-title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  text-align: center;
+  margin-bottom: $spacing-lg;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  @include responsive(sm) {
+    font-size: $font-size-3xl;
+    margin-bottom: $spacing-xl;
+  }
+  
+  @include responsive(md) {
+    font-size: $font-size-4xl;
+  }
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md; 
+
+  @include responsive(sm) {
+    gap: $spacing-lg;
+  }
+  
+  @include responsive(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.game-panel {
+  @include game-panel;
+
+  @include responsive(sm) {
+    padding: $spacing-lg;
+  }
+}
+
+.grid-section {
+  margin-top: $spacing-lg;
+  
+  @include responsive(sm) {
+    margin-top: $spacing-xl;
+  }
+}
+
+.cashout-button {
+  @include button-base;
+  width: 100%;
+  margin-top: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  
+  @include responsive(sm) {
+    margin-top: $spacing-md;
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+
+  &.active {
+    background-color: $success-color;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      background-color: $secondary-color;
+      transform: scale(1.05);
+    }
+  }
+
+  &.disabled {
+    background-color: $tile-unrevealed;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+//cashout button
+.cashout-button.active:hover {
+  animation: shake $animation-duration-fast $animation-timing;
+}
+
+//iOS
+@supports (-webkit-touch-callout: none) {
+  .game-wrapper {
+    min-height: -webkit-fill-available;
+  }
+}
+
+//scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+//landscape
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .game-wrapper {
+    min-height: 100%;
+    height: auto;
+  }
+  
+  .game-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+//touch
+@media (hover: none) and (pointer: coarse) {
+  .cashout-button.active {
+    &:hover {
+      transform: none;
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
