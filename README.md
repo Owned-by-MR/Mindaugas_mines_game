@@ -1,6 +1,7 @@
 Way of using locally:
 
 npm install
+
 npm run dev
 
 
